@@ -1,8 +1,35 @@
 {
-  "name": "vite-vue-template",
+  "name": "superapi-proxy",
   "installCommand": "npm install",
+  "buildCommand": "npm run build",
   "assets": {
     "directory": "./dist",
     "notFoundStrategy": "singlePageApplication"
-  }
+  },
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "https://superapi.superauthority.top/$1",
+      "headers": {
+        "Host": "superapi.superauthority.top"
+      }
+    },
+    {
+      "src": "/proxy/(.*)",
+      "dest": "https://superapi.superauthority.top/$1",
+      "headers": {
+        "Host": "superapi.superauthority.top"
+      }
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "Access-Control-Allow-Origin", "value": "*" },
+        { "key": "Access-Control-Allow-Methods", "value": "GET, POST, PUT, DELETE, OPTIONS" },
+        { "key": "Access-Control-Allow-Headers", "value": "Content-Type, Authorization" }
+      ]
+    }
+  ]
 }
