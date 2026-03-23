@@ -1,18 +1,26 @@
 {
   "name": "superapi-proxy",
-  "installCommand": "npm install",
-  "buildCommand": "npm run build",
-  "assets": {
-    "directory": "./dist"
-  },
   "functions": {
     "directory": "./functions",
-    "runtime": "edge"
+    "runtime": "edge-light"
   },
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "/proxy"
+      "dest": "https://superapi.superauthority.top/$1",
+      "headers": {
+        "Host": "superapi.superauthority.top"
+      }
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "Access-Control-Allow-Origin", "value": "*" },
+        { "key": "Access-Control-Allow-Methods", "value": "GET, POST, PUT, DELETE, OPTIONS, PATCH" },
+        { "key": "Access-Control-Allow-Headers", "value": "*" }
+      ]
     }
   ]
 }
